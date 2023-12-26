@@ -9,7 +9,7 @@ describe("addRetriesToFunction", () => {
     const testFnWithRetries = addRetriesToFunction({ fn: testFn, maxInterval: 0, numberOfRetries: 2 });
     await expect(testFnWithRetries(1, 2)).rejects.toThrowError(AfterRetriesError);
     expect(testFn).toHaveBeenCalledTimes(3);
-    expect(testFn).toHaveBeenCalledWith([1, 2]);
+    expect(testFn).toHaveBeenCalledWith(1, 2);
   });
   test("stop retrying if successful", async () => {
     let attemptsBeforeGivingRightAnswer = 1;
@@ -21,7 +21,7 @@ describe("addRetriesToFunction", () => {
     const testFnWithRetries = addRetriesToFunction({ fn: testFn, maxInterval: 0, numberOfRetries: 2 });
     await testFnWithRetries(1, 2);
     expect(testFn).toHaveBeenCalledTimes(2);
-    expect(testFn).toHaveBeenCalledWith([1, 2]);
+    expect(testFn).toHaveBeenCalledWith(1, 2);
   });
   test("stop retrying if shouldStopTrying return true", async () => {
     let attemptsBeforeStopping = 2;
@@ -32,7 +32,7 @@ describe("addRetriesToFunction", () => {
     const testFnWithRetries = addRetriesToFunction({ fn: testFn, maxInterval: 0, numberOfRetries: 2, shouldStopTrying: () => attemptsBeforeStopping === 0 });
     await expect(testFnWithRetries(1, 2)).rejects.toThrowError(AfterRetriesError);
     expect(testFn).toHaveBeenCalledTimes(2);
-    expect(testFn).toHaveBeenCalledWith([1, 2]);
+    expect(testFn).toHaveBeenCalledWith(1, 2);
   });
   test("correctly waits between 0 and X ms between retries", async () => {
     const times: number[] = [];
