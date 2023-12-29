@@ -1,11 +1,12 @@
 {
   "name": "add-retries-to-function",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/Jirei/add-retries-to-function",
   "description": "Utility function to easily add retries to any function",
   "keywords": [
     "utility",
     "retries",
+    "retry",
     "reliability",
     "type-safe"
   ],
